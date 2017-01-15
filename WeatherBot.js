@@ -46,12 +46,13 @@ app.post('/weather', (req, res) => {
 		request.get(restUrl, (err, response, body) => {
 			if (!err && response.statusCode == 200) {
 				let json = JSON.parse(body);
-				json.weather[0].description + ' and the temperature is ' + json.main.temp + ' ℉';
-				/*return res.json({
+				var msg = json.weather[0].description + ' and the temperature is ' + json.main.temp + ' °F';
+				console.log(msg);
+				return res.json({
 					speech: msg,
 					displayText: msg,
-					source: 'weather'});*/
-				apiaiApp.textRequest(json);
+					source: 'weather'});
+				//apiaiApp.textRequest(json);
 			} else {
 				return res.status(400).json({
 					status: {
