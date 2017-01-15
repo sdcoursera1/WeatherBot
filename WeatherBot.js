@@ -65,7 +65,7 @@ app.post('/weather', (req, res) => {
 function sendMessage(event) {
   let sender = event.sender.id;
   let text = event.message.text;
-
+  /*
   var request = apiaiApp.textRequest(text, { sessionId: 'azerty'});
 
   request.on('response', function(response) {
@@ -76,35 +76,20 @@ function sendMessage(event) {
   	console.log(error);
   });
 
-  request.end();
-
-  /*let apiai = apiaiApp.textRequest(text, {
-    sessionId: 'azerty' // use any arbitrary id
-  });
-
-  apiai.on('response', function(response) {
-    let aiText = response.result.fulfillment.speech;
-
-    request({
-      url: 'https://graph.facebook.com/v2.6/me/messages',
-      qs: {access_token: 'EAAY119ZCG2X4BABOUJHxSkYMyzoe6Mz8PVEuOIXYnDLhaOH5oZAywhurcTZBFjs52qO1JQ36gsmZCxkgsu1jGMoL5V3vQmNqWZCVcJbij06QZCOT96OBWXenRflVbgyBo6rD3E4q9hMKKNbGrUSLGMm1Me7iZAaOK0lkUYNFqryawZDZD'},
-      method: 'POST',
-      json: {
-        recipient: {id: sender},
-        message: {text: aiText}
-      }
-    }, (error, response) => {
-      if (error) {
-          console.log('Error sending message: ', error);
-      } else if (response.body.error) {
-          console.log('Error: ', response.body.error);
-      }
+  request.end();*/
+  request({
+        url: 'https://graph.facebook.com/v2.6/me/messages',
+        qs: {access_token: process.env.PAGE_ACCESS_TOKEN},
+        method: 'POST',
+        json: {
+            recipient: {id: sender},
+            message: text,
+        }
+    }, function(error, response, body) {
+        if (error) {
+            console.log('Error sending message: ', error);
+        } else if (response.body.error) {
+            console.log('Error: ', response.body.error);
+        }
     });
-  });
-
-  apiai.on('error', (error) => {
-    console.log(error);
-  });
-
-  apiai.end();*/
 }
