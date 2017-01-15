@@ -1,10 +1,10 @@
-
+"use strict";
 
 const express = require('express');
 const bodyParser = require('body-parser');
-//const app = express();
+const app = express();
 const apiai = require('apiai');
-const app = apiai('8f013d59656846fca2f064ad5f127f2c');
+const app2 = apiai('8f013d59656846fca2f064ad5f127f2c');
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
@@ -52,7 +52,7 @@ function sendMessage(event) {
 
     request({
       url: 'https://graph.facebook.com/v2.6/me/messages',
-      qs: {access_token: PAGE_ACCESS_TOKEN},
+      qs: {access_token: 'EAAY119ZCG2X4BABOUJHxSkYMyzoe6Mz8PVEuOIXYnDLhaOH5oZAywhurcTZBFjs52qO1JQ36gsmZCxkgsu1jGMoL5V3vQmNqWZCVcJbij06QZCOT96OBWXenRflVbgyBo6rD3E4q9hMKKNbGrUSLGMm1Me7iZAaOK0lkUYNFqryawZDZD'},
       method: 'POST',
       json: {
         recipient: {id: sender},
