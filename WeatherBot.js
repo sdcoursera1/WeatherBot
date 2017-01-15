@@ -41,7 +41,7 @@ app.post('/webhook', (req, res) => {
 app.post('/weather', (req, res) => {
 	if (req.body.result.action === 'weather') {
 		let city = req.body.result.parameters['geo-city'];
-		let restUrl = 'http://api.openweathermap.org/data/2.5/weather?APPID='+'d0aad646908835ef3e99b559ff2d96c0'+'&q='+city;
+		let restUrl = 'http://api.openweathermap.org/data/2.5/forecast'+'&q='+city+'&APPID=d0aad646908835ef3e99b559ff2d96c0';
 
 		request.get(restUrl, (err, response, body) => {
 			if (!err && response.statusCode == 200) {
