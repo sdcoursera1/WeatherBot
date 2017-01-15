@@ -1,0 +1,11 @@
+{
+    "name": "WeatherBot",
+    "version": "0.1.0",
+    "dependencies": {
+        "express": "~4.14.0",
+        "body-parser": "~1.15.2"
+
+    },
+    "author": "Alexandre Bouillon",
+    "description": "Bot météo pour Messenger"
+}
