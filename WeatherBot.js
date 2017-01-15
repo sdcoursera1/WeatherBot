@@ -64,7 +64,19 @@ function sendMessage(event) {
   let sender = event.sender.id;
   let text = event.message.text;
 
-  let apiai = apiaiApp.textRequest(text, {
+  var request = apiaiApp.textRequest(text, { sessionId: 'azerty'});
+
+  request.on('response', function(response) {
+  	console.log(response);
+  });
+
+  request.on('error', function(error) {
+  	console.log(error);
+  });
+
+  request.end();
+
+  /*let apiai = apiaiApp.textRequest(text, {
     sessionId: 'azerty' // use any arbitrary id
   });
 
@@ -92,5 +104,5 @@ function sendMessage(event) {
     console.log(error);
   });
 
-  apiai.end();
+  apiai.end();*/
 }
