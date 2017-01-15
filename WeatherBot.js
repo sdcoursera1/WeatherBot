@@ -65,10 +65,10 @@ function sendMessage(event) {
   let text = event.message.text;
 
   let apiai = apiaiApp.textRequest(text, {
-    sessionId: 'tabby_cat' // use any arbitrary id
+    sessionId: 'azerty' // use any arbitrary id
   });
 
-  apiai.on('response', (response) => {
+  apiai.on('response', function(response) {
     let aiText = response.result.fulfillment.speech;
 
     request({
