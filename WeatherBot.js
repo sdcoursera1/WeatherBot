@@ -59,7 +59,7 @@ app.post('/weather', (req, res) => {
 			}
 			else{
 				console.log(res.code, res.headers, res.buffer.toString());
-				var temp = res.main.temp;
+				var temp = res.weather.temp;
 				var m = 'Il fait '+temp+'°C à '+city;
 				console.log(m);
 			}
