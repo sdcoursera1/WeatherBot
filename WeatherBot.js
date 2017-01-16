@@ -86,9 +86,9 @@ app.post('/weather', (req, res) => {
 						console.error(error);
 					}
 				});
-				})
 			}
-		})
+			
+		});
 	}
 });
 
