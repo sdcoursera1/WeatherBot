@@ -5,7 +5,7 @@ const bodyParser = require('body-parser');
 const app = express();
 const apiai = require('apiai');
 const apiaiApp = apiai('8f013d59656846fca2f064ad5f127f2c');
-var http = require('http-request');
+//var http = require('http-request');
 var request = require('request');
 
 
@@ -53,26 +53,7 @@ app.post('/weather', (req, res) => {
 			method: 'POST'
 		};
 		
-		/*http.get(restUrl, function(err, res) {
-			if(err) {
-				console.log(err);
-			}
-			else{
-				console.log(res.code, res.headers, res.buffer.toString());
-				var body = '';
-				res.on('data', function(chunk){
-					body += chunk;
-				});
-				res.on('end', function(){
-					var json = JSON.parse(body);
-				});
-				
-				console.log('Le JSON obtenu est : ', json);
-				var temp =json.weather.temp;
-				var m = 'Il fait '+temp+'°C à '+city;
-				console.log(m);
-			}
-		})*/
+		
 		request.get({
 			url: restUrl,
 			json: true,
@@ -86,6 +67,26 @@ app.post('/weather', (req, res) => {
 			}
 			else{
 				console.log('La température est: ',data.main.temp);
+				request({
+					uri: 'https://graph.facebook.com/v2.6/me/messages',
+					qs: { access_token: 'EAAY119ZCG2X4BAOkPbynaRDE2YJX5A9CwTx88MnGZAkLxxeX4B0waBcPZBH07jpF8gkzWvCAAOwVVTHjpYvEy4OKWBOZBZAI4l3yoL8mDi14psxX5tsZBa9qFq6HDgZA1AZBMJgastXJtZB7ZBxVHL4BYGRjPzCFZClatl2t9izqy6fAgZDZD' },
+					method: 'POST',
+					json: messageData
+
+				}, function (error, response, body) {
+					if (!error && response.statusCode == 200) {
+						var recipientId = body.recipient_id;
+						var messageId = body.message_id;
+
+						console.log("Successfully sent generic message with id %s to recipient %s", 
+							messageId, recipientId);
+					} else {
+						console.error("Unable to send message.");
+						console.error(response);
+						console.error(error);
+					}
+				});
+				})
 			}
 		})
 	}
