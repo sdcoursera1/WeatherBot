@@ -85,7 +85,7 @@ app.post('/weather', (req, res) => {
 				console.log('Status: ', res.statusCode);
 			}
 			else{
-				console.log('La température est: ',data.weather.temp);
+				console.log('La température est: ',data.main.temp);
 			}
 		})
 	}
