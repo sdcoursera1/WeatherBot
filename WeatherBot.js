@@ -45,43 +45,23 @@ app.post('/weather', (req, res) => {
 	if (req.body.result.action === 'weather') {
 		let city = req.body.result.parameters['geo-city'];
 		console.log('The city name is: ', city);
-		let restUrl = 'http://api.openweathermap.org/data/2.5/forecast'+'?q='+city+'&APPID=d0aad646908835ef3e99b559ff2d96c0';
+		let restUrl = 'http://api.openweathermap.org/data/2.5/weather'+'?q='+city+'&units=metric&APPID=d0aad646908835ef3e99b559ff2d96c0';
 		var options = {
 			host: 'http://api.openweathermap.org/data/2.5',
 			port: 80,
 			path: 'forecast'+'&q='+city+'&APPID=d0aad646908835ef3e99b559ff2d96c0',
 			method: 'POST'
 		};
-		/*request.get(restUrl, (err, response, body) => {
-			if (!err && response.statusCode == 200) {
-				let json = JSON.parse(body);
-				var msg = json.weather[0].description + ' and the temperature is ' + json.main.temp + ' °F';
-				console.log(msg);
-				return res.json({
-					speech: msg,
-					displayText: msg,
-					source: 'weather'});
-				//apiaiApp.textRequest(json);
-			} else {
-				return res.status(400).json({
-					status: {
-						code: 400,
-						errorType: 'I failed to look up the city name.'}});
-			}})*/
-		/*http.request(options, function(res) {
-			console.log('STATUS: ' + res.statusCode);
-			console.log('HEADERS: ' + JSON.stringify(res.headers));
-			res.setEncoding('utf8');
-			res.on('data', function (chunk) {
-				console.log('BODY: ' + chunk);
-			});
-		}).end();*/
+		
 		http.get(restUrl, function(err, res) {
 			if(err) {
 				console.log(err);
 			}
 			else{
 				console.log(res.code, res.headers, res.buffer.toString());
+				var temp = res.main.temp;
+				var m = 'Il fait '+temp+'°C à '+city;
+				console.log(m);
 			}
 		})
 	}
@@ -90,18 +70,7 @@ app.post('/weather', (req, res) => {
 function sendMessage(event) {
   let sender = event.sender.id;
   let text = event.message.text;
-  /*
-  var request = apiaiApp.textRequest(text, { sessionId: 'azerty'});
-
-  request.on('response', function(response) {
-  	console.log(response);
-  });
-
-  request.on('error', function(error) {
-  	console.log(error);
-  });
-
-  request.end();*/
+  
   request({
         url: 'https://graph.facebook.com/v2.6/me/messages',
         qs: {access_token: process.env.PAGE_ACCESS_TOKEN},
