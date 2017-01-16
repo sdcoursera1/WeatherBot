@@ -53,7 +53,7 @@ app.post('/weather', (req, res) => {
 			method: 'POST'
 		};
 		
-		http.get(restUrl, function(err, res) {
+		/*http.get(restUrl, function(err, res) {
 			if(err) {
 				console.log(err);
 			}
@@ -71,6 +71,21 @@ app.post('/weather', (req, res) => {
 				var temp =json.weather.temp;
 				var m = 'Il fait '+temp+'°C à '+city;
 				console.log(m);
+			}
+		})*/
+		request.get({
+			url: restUrl,
+			json: true,
+			headers: {'User-Agent': 'request'}
+		}, (err, res, data) => {
+			if(err) {
+				console.log('Error:', err);
+			} 
+			else if (res.statusCode != 200) {
+				console.log('Status: ', res.statusCode);
+			}
+			else{
+				console.log('La température est: ',data.weather.temp);
 			}
 		})
 	}
