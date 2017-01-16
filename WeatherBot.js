@@ -71,7 +71,7 @@ app.post('/weather', (req, res) => {
 					uri: 'https://graph.facebook.com/v2.6/me/messages',
 					qs: { access_token: 'EAAY119ZCG2X4BAOkPbynaRDE2YJX5A9CwTx88MnGZAkLxxeX4B0waBcPZBH07jpF8gkzWvCAAOwVVTHjpYvEy4OKWBOZBZAI4l3yoL8mDi14psxX5tsZBa9qFq6HDgZA1AZBMJgastXJtZB7ZBxVHL4BYGRjPzCFZClatl2t9izqy6fAgZDZD' },
 					method: 'POST',
-					json: messageData
+					json: data.main.temp
 
 				}, function (error, response, body) {
 					if (!error && response.statusCode == 200) {
