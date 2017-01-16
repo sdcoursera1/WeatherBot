@@ -59,7 +59,14 @@ app.post('/weather', (req, res) => {
 			}
 			else{
 				console.log(res.code, res.headers, res.buffer.toString());
-				var json = JSON.parse(res);
+				var body = '';
+				res.on('data', function(chunk){
+					body += chunk;
+				});
+				res.on('end', function(){
+					var json = JSON.parse(body);
+				});
+				
 				console.log('Le JSON obtenu est : ', json);
 				var temp =json.weather.temp;
 				var m = 'Il fait '+temp+'°C à '+city;
