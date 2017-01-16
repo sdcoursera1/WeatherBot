@@ -5,6 +5,8 @@ const bodyParser = require('body-parser');
 const app = express();
 const apiai = require('apiai');
 const apiaiApp = apiai('8f013d59656846fca2f064ad5f127f2c');
+//var http = require('http');
+var request = require('request');
 
 
 app.use(bodyParser.json());
@@ -50,7 +52,7 @@ app.post('/weather', (req, res) => {
 			path: 'forecast'+'&q='+city+'&APPID=d0aad646908835ef3e99b559ff2d96c0',
 			method: 'POST'
 		};
-		/*request.get(restUrl, (err, response, body) => {
+		request.get(restUrl, (err, response, body) => {
 			if (!err && response.statusCode == 200) {
 				let json = JSON.parse(body);
 				var msg = json.weather[0].description + ' and the temperature is ' + json.main.temp + ' °F';
@@ -65,15 +67,15 @@ app.post('/weather', (req, res) => {
 					status: {
 						code: 400,
 						errorType: 'I failed to look up the city name.'}});
-			}})*/
-		http.request(options, function(res) {
+			}})
+		/*http.request(options, function(res) {
 			console.log('STATUS: ' + res.statusCode);
 			console.log('HEADERS: ' + JSON.stringify(res.headers));
 			res.setEncoding('utf8');
 			res.on('data', function (chunk) {
 				console.log('BODY: ' + chunk);
 			});
-		}).end();
+		}).end();*/
 	}
 });
 
