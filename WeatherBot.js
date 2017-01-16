@@ -45,7 +45,7 @@ app.post('/weather', (req, res) => {
 	if (req.body.result.action === 'weather') {
 		let city = req.body.result.parameters['geo-city'];
 		console.log('The city name is: ', city);
-		let restUrl = 'http://api.openweathermap.org/data/2.5/forecast'+'&q='+city+'&APPID=d0aad646908835ef3e99b559ff2d96c0';
+		let restUrl = 'http://api.openweathermap.org/data/2.5/forecast'+'?q='+city+'&APPID=d0aad646908835ef3e99b559ff2d96c0';
 		var options = {
 			host: 'http://api.openweathermap.org/data/2.5',
 			port: 80,
